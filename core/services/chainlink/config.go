@@ -36,6 +36,11 @@ type Config struct {
 	Terra []TerraConfig `toml:",omitempty"`
 }
 
+func (c *Config) Validate() error {
+	// TODO: implement
+	return nil
+}
+
 // TOMLString returns a pretty-printed TOML encoded string, with extra line breaks removed.
 func (c *Config) TOMLString() (string, error) {
 	b, err := toml.Marshal(c)

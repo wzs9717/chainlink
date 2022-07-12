@@ -27,6 +27,7 @@ import (
 	"github.com/smartcontractkit/chainlink/core/bridges"
 	"github.com/smartcontractkit/chainlink/core/config"
 	"github.com/smartcontractkit/chainlink/core/logger"
+	configV2 "github.com/smartcontractkit/chainlink/core/services/chainlink"
 	"github.com/smartcontractkit/chainlink/core/sessions"
 	"github.com/smartcontractkit/chainlink/core/static"
 	"github.com/smartcontractkit/chainlink/core/store/models"
@@ -443,6 +444,35 @@ func (cli *Client) ConfigDump(c *clipkg.Context) (err error) {
 	}
 	fmt.Print(configStr)
 	return nil
+}
+
+func printFailMessage(err error) {
+	fmt.Printf("Validation failed (%s)\n", err.Error())
+}
+
+func (cli *Client) ConfigFileValidate(c *clipkg.Context) (err error) {
+	fileName := c.String("file")
+	data, err := os.ReadFile(fileName)
+	if err != nil {
+		printFailMessage(err)
+		return
+	}
+
+	var parsedConfig configV2.Config
+	decoder := toml.NewDecoder(strings.NewReader(string(data)))
+	err = decoder.Decode(&parsedConfig)
+	if err != nil {
+		printFailMessage(err)
+		return
+	}
+	err = parsedConfig.Validate()
+	if err != nil {
+		printFailMessage(err)
+	} else {
+		fmt.Println("Validation succeeded!")
+	}
+	// TODO: compare default values to those explicitly set
+	return
 }
 
 func normalizePassword(password string) string {
