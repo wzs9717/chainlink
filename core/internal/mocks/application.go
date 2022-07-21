@@ -255,6 +255,22 @@ func (_m *Application) GetLogger() logger.Logger {
 	return r0
 }
 
+// GetSecretGenerator provides a mock function with given fields:
+func (_m *Application) GetSecretGenerator() chainlink.SecretGenerator {
+	ret := _m.Called()
+
+	var r0 chainlink.SecretGenerator
+	if rf, ok := ret.Get(0).(func() chainlink.SecretGenerator); ok {
+		r0 = rf()
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(chainlink.SecretGenerator)
+		}
+	}
+
+	return r0
+}
+
 // GetSqlxDB provides a mock function with given fields:
 func (_m *Application) GetSqlxDB() *sqlx.DB {
 	ret := _m.Called()
