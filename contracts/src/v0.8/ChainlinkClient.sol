@@ -217,15 +217,16 @@ abstract contract ChainlinkClient {
    * @param linkAddress The address of the LINK token contract
    */
   function setChainlinkToken(address linkAddress) internal {
-    s_link = LinkTokenInterface(linkAddress);
+    s_link = LinkTokenInterface(linkAddress);//<<<<<<<<<<<<<<here
   }
 
   /**
    * @notice Sets the Chainlink token address for the public
    * network as given by the Pointer contract
    */
-  function setPublicChainlinkToken() internal {
-    setChainlinkToken(PointerInterface(LINK_TOKEN_POINTER).getAddress());
+  function setPublicChainlinkToken(address linkAddress) internal {
+    // setChainlinkToken(PointerInterface(LINK_TOKEN_POINTER).getAddress());//<<<<<<<<<<<<<<here
+    setChainlinkToken(linkAddress);
   }
 
   /**

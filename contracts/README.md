@@ -1,62 +1,34 @@
-# Chainlink Smart Contracts
+# chainlink_contract
 
-## Installation
+Notice: This is only the onchain part repo, offchain(node) part is as same as official deployment
 
-```sh
-# via Yarn
-$ yarn add @chainlink/contracts
-# via npm
-$ npm install @chainlink/contracts --save
-```
+https://docs.chain.link/docs/running-a-chainlink-node/
 
-### Directory Structure
 
-```sh
-@chainlink/contracts
-├── src # Solidity contracts
-│   ├── v0.4
-│   ├── v0.5
-│   ├── v0.6
-│   ├── v0.7
-│   └── v0.8
-└── abi # ABI json output
-    ├── v0.4
-    ├── v0.5
-    ├── v0.6
-    ├── v0.7
-    └── v0.8
-```
 
-### Usage
+# Deployment
 
-The solidity smart contracts themselves can be imported via the `src` directory of `@chainlink/contracts`:
+The contract to deploy chainlink with our own token
 
-```solidity
-import '@chainlink/contracts/src/v0.8/KeeperCompatibleInterface.sol';
+![image|684x500](./img/files.png?raw=true)
 
-```
 
-## Local Development
 
-Note: Contracts in `dev/` directories are under active development and are likely unaudited. Please refrain from using these in production applications.
+main contracts are `MLINK.sol`, `LinkTokenReceiver.sol` and `Oracle.sol`, other contracats are dependencies(but you still need them since they will be used in `Oracle.sol`).
 
-```bash
-# Clone Chainlink repository
-$ git clone https://github.com/smartcontractkit/chainlink.git
-# Continuing via Yarn
-$ cd contracts/
-$ yarn
-$ yarn test
-```
+`MLINK.sol` is the ERC20 token to replace the LINK payment.
 
-## Contributing
+`Oracle.sol` is the oracle contract.
 
-Contributions are welcome! Please refer to
-[Chainlink's contributing guidelines](../docs/CONTRIBUTING.md) for detailed
-contribution information.
+ `LinkTokenReceiver.sol` is a caller contract to call oracle.
 
-Thank you!
 
-## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+# Appendix
+
+## chainlink structure
+
+![image|684x500](./img/chainlink.drawio.png?raw=true)
+
+
+
