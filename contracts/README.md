@@ -14,13 +14,15 @@ The contract to deploy chainlink with our own token
 
 
 
-main contracts are `MLINK.sol`, `LinkTokenReceiver.sol` and `Oracle.sol`, other contracats are dependencies(but you still need them since they will be used in `Oracle.sol`).
+main contracts are `MLINK.sol`, `caller.sol` and `Oracle.sol`, other contracats are dependencies(but you still need them since they will be used in `Oracle.sol`).
 
 `MLINK.sol` is the ERC20 token to replace the LINK payment.
 
 `Oracle.sol` is the oracle contract.
 
- `LinkTokenReceiver.sol` is a caller contract to call oracle.
+ `caller.sol` is a caller contract to call oracle.
+
+you can mimic `function requestEthereumPrice(address _oracle, string memory _jobId)`in `caller.sol` in your contract to interact with oracle. 
 
 
 
